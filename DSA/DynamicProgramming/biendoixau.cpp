@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+#define all(x) x.begin(),x.end()
+using namespace std;
+using ll = long long;
+
+const ll mod = 1e9 + 7;
+
+int main()
+{
+	string x, y; cin >> x >> y;
+	int n = x.size(), m = y.size();
+	ll f[n+1][m+1];
+	for(int i = 0; i <= n; i++)
+	{
+		for(int j = 0; j <= m; j++)
+		{
+			if(i == 0) f[i][j] = j;
+			else if(j == 0) f[i][j] = i;
+			else
+			{
+				if(x[i-1] == y[j-1])
+					f[i][j] = f[i-1][j-1];
+				else
+					f[i][j] = min({f[i-1][j], f[i-1][j-1], f[i][j-1]}) + 1;
+			}
+		}
+	}
+	cout << f[n][m];
+}
